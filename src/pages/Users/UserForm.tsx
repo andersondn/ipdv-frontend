@@ -3,8 +3,6 @@ import useSWR from 'swr';
 import { formLayout } from '../../helpers/form';
 import { RoleList } from '../../helpers/rolesList';
 import { User } from '../../types/userTypes';
-// import { companiesToOptionMap, formLayout } from "../../lib/helpers";
-// import { IUser, ICompany } from '../../types';
 const { Option } = Select;
 
 

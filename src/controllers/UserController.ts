@@ -39,5 +39,24 @@ class UserController {
 
     return result;
   }
+
+    async deleteUser(userId: number) {
+    const result = await api
+      .delete(`/users/${userId}`)
+      .then((response) => ({
+        success: true,
+        data: response.data,
+        message: "Usuário criado com sucesso",
+      }))
+      .catch((error) => ({
+        success: false,
+        message:
+          error?.response?.data?.validation?.body?.message ||
+          error?.response?.data?.message ||
+          "Erro ao tentar deletar usuário",
+      }));
+
+    return result;
+  }
 }
 export default UserController;

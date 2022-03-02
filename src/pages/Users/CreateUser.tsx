@@ -1,15 +1,10 @@
 import React from 'react';
 import message from "antd/lib/message";
 import { useState } from "react";
-// import { useHistory } from "react-router";
-// import { createUser } from "../../controllers/UserController";
-// import { IUser } from "../../types";
 import UserForm from "./UserForm"
 import { User } from '../../types/userTypes';
 import UserController from '../../controllers/UserController';
 import { useNavigate } from 'react-router-dom';
-
-// import { Container } from './styles';
 
 const CreateUser: React.FC = () => {
     const userController = new UserController();
