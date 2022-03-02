@@ -70,7 +70,8 @@ const Login: React.FC = () => {
           label="Senha"
           name="password"
           rules={[
-            { required: true, message: "Por favor informe sua senha." },
+            { required: true, message: "Por favor informe sua senha.",},
+            {min: 6, message: 'A senha deve ter no mínimo 6 caracteres.'}
           ]}
         >
           <Input type='password' />
