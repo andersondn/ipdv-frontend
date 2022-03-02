@@ -22,8 +22,8 @@ const AppSlider = () => {
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item key="/department" icon={<ApartmentOutlined />}>
-                    <Link to="/department">Departamentos</Link>
+                <Menu.Item key="/departments" icon={<ApartmentOutlined />}>
+                    <Link to="/departments">Departamentos</Link>
                 </Menu.Item>
  
                 <Menu.Item key="/users" icon={<UserOutlined />}>
