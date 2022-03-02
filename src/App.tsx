@@ -2,11 +2,13 @@ import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./lib/routes";
 import { SWRConfig } from "swr";
-import { Layout } from "antd";
+import { Col, Layout, Row } from "antd";
 import AppSlider from "./components/Slider";
 import { Content, Footer, Header } from "antd/lib/layout/layout";
 import api from "./lib/api";
 import { AuthProvider } from "./context/AuthContext";
+import Countdown from "antd/lib/statistic/Countdown";
+import AppHeader from './components/Header';
 
 function App() {
   const fetcher = (url: string) => api(url).then((r) => r.data);
@@ -18,10 +20,7 @@ function App() {
           <Layout style={{ minHeight: "100vh" }}>
             <AppSlider />
             <Layout>
-              <Header
-                className="site-layout-sub-header-background"
-                style={{ padding: 0 }}
-              />
+              <AppHeader />
               <Content style={{ margin: "24px 16px 0" }}>
                 <AppRoutes />
               </Content>
