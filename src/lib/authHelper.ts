@@ -1,6 +1,6 @@
 import { TOKEN_KEY } from "../helpers/constants";
 
-export function setToken(token: string) {
+export function setLocalToken(token: string) {
   localStorage.setItem(TOKEN_KEY, token);
 }
 export function getToken() {
