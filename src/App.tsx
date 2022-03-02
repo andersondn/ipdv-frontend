@@ -1,14 +1,13 @@
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
-import AppRoutes from "./lib/routes";
+import AppRoutes from "./routes/routes";
 import { SWRConfig } from "swr";
-import { Col, Layout, Row } from "antd";
+import { Layout } from "antd";
 import AppSlider from "./components/Slider";
-import { Content, Footer, Header } from "antd/lib/layout/layout";
+import { Content, Footer } from "antd/lib/layout/layout";
 import api from "./lib/api";
 import { AuthProvider } from "./context/AuthContext";
-import Countdown from "antd/lib/statistic/Countdown";
-import AppHeader from './components/Header';
+import AppHeader from "./components/Header";
 
 function App() {
   const fetcher = (url: string) => api(url).then((r) => r.data);

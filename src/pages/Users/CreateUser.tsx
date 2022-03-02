@@ -7,26 +7,27 @@ import { useState } from "react";
 import UserForm from "./UserForm"
 import { User } from '../../types/userTypes';
 import UserController from '../../controllers/UserController';
+import { useNavigate } from 'react-router-dom';
 
 // import { Container } from './styles';
 
 const CreateUser: React.FC = () => {
     const userController = new UserController();
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    // const history = useHistory()
+    const navigate = useNavigate();
+
 
     async function handlerSubmit(formData: User) {
         setIsLoading(true)
-        try {
-            const result = await userController.createUser(formData)
-            // await createUser(formData)
-            message.success(`Usuário cadastrado com sucesso!`);
-            // history.push('/usuarios')
+        const result = await userController.createUser(formData)
 
-        } catch (error) {
-            message.error(`Erro ao cadastrar o Usuário.`);
-            setIsLoading(false)
+        if(result.success){
+            message.success(`Usuário cadastrado com sucesso!`);
+            navigate('/users')
+        }else {
+            message.error(result.message || `Erro ao cadastrar o Usuário.`);
         }
+        setIsLoading(false)
 
     }
 

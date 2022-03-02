@@ -3,6 +3,7 @@ import React from "react";
 import { PlusOutlined, DeleteTwoTone, EditTwoTone } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import useSWR from "swr";
+import { RoleList } from "../../helpers/rolesList";
 
 // import { Container } from './styles';
 
@@ -46,6 +47,7 @@ const Users: React.FC = () => {
 		{
 			title: 'Cargo',
 			dataIndex: 'role',
+      render: (role: string) => RoleList[role]
 		},
     {
       title: 'Departamento',

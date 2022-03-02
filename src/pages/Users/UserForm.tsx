@@ -1,16 +1,12 @@
 import { Form, Input, Select, Button } from 'antd';
 import useSWR from 'swr';
 import { formLayout } from '../../helpers/form';
+import { RoleList } from '../../helpers/rolesList';
 import { User } from '../../types/userTypes';
 // import { companiesToOptionMap, formLayout } from "../../lib/helpers";
 // import { IUser, ICompany } from '../../types';
 const { Option } = Select;
-const RoleList = {
-    ADMIN: 'Administrador',
-    MANAGER: 'Gerente',
-    EMPLOYEE: 'Funcionário',
 
-}
 
 interface IUserForm {
     user?: User,
@@ -50,7 +46,7 @@ const UserForm = ({ user, isLoading = false, submitTitle = 'Enviar', handlerSubm
                 <Form.Item
                     label="Departamento"
                     name="department_id"
-                    rules={[{ required: true, message: 'Por favor selecione um usuário.' }]}
+                    rules={[{ required: true, message: 'Por favor selecione um departamento.' }]}
                 >
                     <Select defaultValue="">
                         <Option value="">Selecionar dapartamento</Option>
@@ -63,7 +59,7 @@ const UserForm = ({ user, isLoading = false, submitTitle = 'Enviar', handlerSubm
                 <Form.Item
                     label="Cargo"
                     name="role"
-                    rules={[{ required: true, message: 'Por favor selecione um usuário.' }]}
+                    rules={[{ required: true, message: 'Por favor selecione um cargo.' }]}
                 >
                     <Select defaultValue="">
                         <Option value="">Selecionar cargo</Option>
@@ -73,13 +69,13 @@ const UserForm = ({ user, isLoading = false, submitTitle = 'Enviar', handlerSubm
                     </Select>
                 </Form.Item>
 
-                <Form.Item
+              {!user &&  <Form.Item
                     label="Senha"
                     name="password"
-                    rules={[{ required: true, message: 'Por favor informe a senha do usuário.'}, {min: 6, message: 'A senha deve ter no mínimo 6 caracteres.'}]}
+                    rules={[{ required: true, message: 'Por favor informe a senha do usuário.'}, {min: 2, message: 'A senha deve ter no mínimo 6 caracteres.'}]}
                 >
                     <Input type="password" />
-                </Form.Item>
+                </Form.Item>}
 
                 <Form.Item wrapperCol={{ offset: 1, span: 6 }}>
                     <Button
