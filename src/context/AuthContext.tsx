@@ -38,8 +38,8 @@ export const AuthContext = createContext({} as AuthContextType);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser>();
   const [token, setToken] = useState<string>();
-  const [loading, setLoading] = useState(true);
-  const [sessionExpireDate, setSessionExpireDate] = useState<Date>();
+  // const [loading, setLoading] = useState(true);
+  // const [sessionExpireDate, setSessionExpireDate] = useState<Date>();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {

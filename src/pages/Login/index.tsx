@@ -2,7 +2,7 @@ import { Button, Form, Input } from "antd";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import { DateTime, Duration } from '../../../node_modules/luxon/build/amd/luxon';
+import { DateTime } from '../../../node_modules/luxon/build/amd/luxon';
 
 // import { Container } from './styles';
 type LoginForm = {
