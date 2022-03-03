@@ -11,7 +11,7 @@ const LogOut: React.FC = () => {
         auth.logOut();
         navigate("/login");
 
-    }, [])
+    })
   return <div />;
 }
 
