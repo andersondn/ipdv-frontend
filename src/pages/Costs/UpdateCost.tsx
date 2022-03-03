@@ -21,11 +21,11 @@ const UpdateCost = () => {
         const result = await costController.updateCost(cost.id, formData)
 
         if(result.success){
-            message.success(`Usuário atualizado com sucesso!`);
+            message.success(`Custo atualizado com sucesso!`);
             mutate(`/costs/${costId}`)
             navigate('/costs')
         }else {
-            message.error(result.message || `Erro ao cadastrar o Usuário.`);
+            message.error(result.message || `Erro ao cadastrar o Custo.`);
         }
         setIsLoading(false)
 
@@ -36,7 +36,7 @@ const UpdateCost = () => {
         {JSON.stringify(error)}
         <Result
             status="500"
-            title="Erro ao carregar dados do usuário."
+            title="Erro ao carregar os custos."
             subTitle="Por favor, verifique se usuário existe e se o servidor está respondendo corretamente"
             />
             </>

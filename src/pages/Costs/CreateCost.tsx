@@ -17,10 +17,10 @@ const CreateCost: React.FC = () => {
         const result = await costController.createCost(formData)
 
         if(result.success){
-            message.success(`Usuário cadastrado com sucesso!`);
+            message.success(`Custo cadastrado com sucesso!`);
             navigate('/costs')
         }else {
-            message.error(result.message || `Erro ao cadastrar o Usuário.`);
+            message.error(result.message || `Erro ao cadastrar o custo.`);
         }
         setIsLoading(false)
 

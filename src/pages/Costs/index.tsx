@@ -37,7 +37,7 @@ const Costs: React.FC = () => {
         true
       );
     } else {
-      message.error(result.message || `Erro ao excluir o Usuário.`);
+      message.error(result.message || `Erro ao excluir custo.`);
     }
   }
 
@@ -51,7 +51,7 @@ const Costs: React.FC = () => {
       <Tooltip title="Apagar">
         <Popconfirm
           placement="leftBottom"
-          title={`Deseja realmente apagar o usuário ${cost.name}?`}
+          title={`Deseja realmente apagar custo ${cost.title}?`}
           onConfirm={() => handleDelete(cost.id)}
           okText="Sim"
           cancelText="não"
