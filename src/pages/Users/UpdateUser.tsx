@@ -21,7 +21,7 @@ const UpdateUser = () => {
         const result = await userController.updateUser(user.id, formData)
 
         if(result.success){
-            message.success(`Usuário cadastrado com sucesso!`);
+            message.success(`Usuário atualizado com sucesso!`);
             navigate('/users')
         }else {
             message.error(result.message || `Erro ao cadastrar o Usuário.`);

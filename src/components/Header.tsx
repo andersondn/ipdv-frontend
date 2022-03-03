@@ -2,12 +2,18 @@ import { Col, Row } from "antd";
 import { Header } from "antd/lib/layout/layout";
 import Countdown from "antd/lib/statistic/Countdown";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 // import { Container } from './styles';
 
 const AppHeader: React.FC = () => {
   const auth = useAuth();
+  const navigate = useNavigate();
+  const onFinish = async () => {
+    auth.logOut();
+    navigate("/login");
+  }
 
   return (
     <>
@@ -22,6 +28,7 @@ const AppHeader: React.FC = () => {
                 value={auth.user.exp * 1000}
                 valueStyle={{ color: "#ccc" }}
                 style={{color: '#fff'}}
+                onFinish={onFinish}
               />
             )}
         </Row>
