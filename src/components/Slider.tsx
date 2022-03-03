@@ -1,5 +1,5 @@
 import { Layout, Menu } from 'antd';
-import { UserOutlined, BankOutlined, HomeOutlined,  ApartmentOutlined } from '@ant-design/icons';
+import { UserOutlined, LogoutOutlined, HomeOutlined,  ApartmentOutlined } from '@ant-design/icons';
 import { Link, } from "react-router-dom";
 const { Sider } = Layout;
 
@@ -30,7 +30,7 @@ const AppSlider = () => {
                     <Link to="/users">Usuários</Link>
                 </Menu.Item>
 
-                <Menu.Item key="/logout" icon={<BankOutlined />}>
+                <Menu.Item key="/logout" icon={<LogoutOutlined />}>
                     <Link to="/logout">Sair</Link>
                 </Menu.Item>
             </Menu>
