@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import api from "../lib/api";
-import { setLocalToken, getToken } from '../lib/authHelper';
+import { setLocalToken, getToken, deleteToken } from "../lib/authHelper";
 import jwt_decode from "jwt-decode";
 
 type LoginParams = {
@@ -22,7 +22,6 @@ type AuthUser = {
   iat: number;
 };
 
-
 type AuthContextType = {
   user?: AuthUser;
   token?: string;
@@ -38,9 +37,9 @@ export const AuthContext = createContext({} as AuthContextType);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser>();
   const [token, setToken] = useState<string>();
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   // const [sessionExpireDate, setSessionExpireDate] = useState<Date>();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   useEffect(() => {
     const localToken = getToken();
@@ -48,25 +47,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (localToken) {
       setToken(localToken);
       setIsLoggedIn(true);
-      console.log(jwt_decode(localToken))
+      console.log(jwt_decode(localToken));
       setUser(jwt_decode(localToken) as AuthUser);
-
+      return;
     }
-
-  }, [])
+    setIsLoggedIn(false);
+  }, []);
 
   const logIn = async (loginData: LoginParams) => {
     console.log("logIn", loginData);
 
-    const { data } = await api
-      .post("/login", loginData)
-      .catch((error) => ({
-        data: {
-          success: false,
-          message: error.message || "Erro ao tentar logar",
-        },
-      }));
-      console.log("logIn success", data);
+    const { data } = await api.post("/login", loginData).catch((error) => ({
+      data: {
+        success: false,
+        message: error.message || "Erro ao tentar logar",
+      },
+    }));
+    console.log("logIn success", data);
 
     if (data.token) {
       setToken(data.token);
@@ -85,7 +82,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   };
 
-  const logOut = () => {};
+  const logOut = () => {
+    deleteToken();
+  };
+
 
   return (
     <>

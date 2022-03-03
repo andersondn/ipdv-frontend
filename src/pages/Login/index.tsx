@@ -17,21 +17,6 @@ const Login: React.FC = () => {
 
     const auth = useAuth();
 
-    function calculateSessionExpireTime(){
-        if(auth?.user.exp)
-         return DateTime.fromSeconds(auth?.user?.exp).diff(DateTime.now()).toFormat('mm:ss');
-        return '00:00';
-
-    }
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setExpireAt(calculateSessionExpireTime());
-            console.log('aa')
-        }, 1000);
-      
-        return () => clearTimeout(timer);
-      },[]);
-
   const onFinish = async ({email, password}: LoginForm) => {
     setLoading(true);
     const result =  await  auth.logIn({
@@ -49,9 +34,7 @@ const Login: React.FC = () => {
   return (
     <>
       <h1>Login page</h1>
-    {JSON.stringify(auth)}
     <br />
-   Sessão expira em: {expireAt}
     
      {/* //~> in 3 hr, 13 min} */}
       <Form
