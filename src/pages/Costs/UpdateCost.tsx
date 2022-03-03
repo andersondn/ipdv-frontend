@@ -5,7 +5,6 @@ import { message, Spin, Result } from 'antd';
 import { useState } from "react";
 import { Cost } from "../../types/costTypes";
 import CostController from "../../controllers/CostController";
-import moment from "moment";
 
 const UpdateCost = () => {
     const costController = new CostController();

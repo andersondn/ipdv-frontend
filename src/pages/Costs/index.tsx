@@ -2,7 +2,6 @@ import {
   Button,
   message,
   Popconfirm,
-  Row,
   Select,
   Space,
   Table,
@@ -102,7 +101,12 @@ const Costs: React.FC = () => {
   return (
     <>
       <h1>Central de custos</h1>
-      <Space size={6} className="flex-gap" wrap={true}>
+      <Space
+        size={6}
+        className="flex-gap"
+        wrap={true}
+        style={{ marginBottom: "1em" }}
+      >
         <Search
           placeholder="Pesquisar por titulo, usuário ou departamento"
           allowClear
