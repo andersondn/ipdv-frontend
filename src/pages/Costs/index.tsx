@@ -3,21 +3,22 @@ import React from "react";
 import { PlusOutlined, DeleteTwoTone, EditTwoTone } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import useSWR, { mutate } from "swr";
-import { RoleList } from "../../helpers/rolesList";
-import UserController from "../../controllers/UserController";
-import { User } from "../../types/userTypes";
+import CostController from "../../controllers/CostController";
+import { Cost } from "../../types/costTypes";
+import { DateTime } from "luxon";
+import { integerToCurrency } from "../../helpers/format";
 
-const Users: React.FC = () => {
-  const { data: users, error } = useSWR("/users");
-  const isDataLoading = !error && !users;
-  const userController = new UserController();
+const Costs: React.FC = () => {
+  const { data: costs, error } = useSWR("/costs");
+  const isDataLoading = !error && !costs;
+  const costController = new CostController();
 
-  async function handleDelete(userId: number) {
-    const result = await userController.deleteUser(userId);
+  async function handleDelete(costId: number) {
+    const result = await costController.deleteCost(costId);
     if (result.success) {
       mutate(
-        "/users",
-        (users: User[]) => users && users.filter((user) => user.id !== userId),
+        "/costs",
+        (costs: Cost[]) => costs && costs.filter((cost) => cost.id !== costId),
         true
       );
     } else {
@@ -25,18 +26,18 @@ const Users: React.FC = () => {
     }
   }
 
-  const actionsButtons = (text: string, user: any) => (
+  const actionsButtons = (text: string, cost: any) => (
     <Space>
       <Tooltip title="Editar">
-        <Link to={`/users/edit/${user.id}`}>
+        <Link to={`/costs/edit/${cost.id}`}>
           <Button shape="circle" icon={<EditTwoTone />} />
         </Link>
       </Tooltip>
       <Tooltip title="Apagar">
         <Popconfirm
           placement="leftBottom"
-          title={`Deseja realmente apagar o usuário ${user.name}?`}
-          onConfirm={() => handleDelete(user.id)}
+          title={`Deseja realmente apagar o usuário ${cost.name}?`}
+          onConfirm={() => handleDelete(cost.id)}
           okText="Sim"
           cancelText="não"
         >
@@ -52,21 +53,27 @@ const Users: React.FC = () => {
 
   const columns: any = [
     {
-      title: "Nome",
-      dataIndex: "name",
+      title: "Titulo",
+      dataIndex: "title",
     },
     {
-      title: "E-mail",
-      dataIndex: "email",
+      title: "Valor",
+      dataIndex: "amount",
+      render: (text: string) => `R$ ${integerToCurrency(text)}`,
     },
     {
-      title: "Cargo",
-      dataIndex: "role",
-      render: (role: string) => RoleList[role],
+      title: "Criado por",
+      dataIndex: "user_name",
     },
     {
       title: "Departamento",
       dataIndex: "department_title",
+    },
+    {
+      title: "Data",
+      dataIndex: "date",
+      render: (date: string) => DateTime.fromMillis(+date).toFormat("dd/MM/yyyy") ,
+
     },
     {
       title: "Ações",
@@ -78,16 +85,16 @@ const Users: React.FC = () => {
 
   return (
     <>
-      <h1>Usuários</h1>
+      <h1>Central de custos</h1>
 
       <Row justify="end">
-        <Link to="/users/add">
+        <Link to="/costs/add">
           <Button icon={<PlusOutlined />}>Adicionar</Button>
         </Link>
       </Row>
       <Table
         columns={columns}
-        dataSource={users}
+        dataSource={costs}
         rowKey="id"
         loading={isDataLoading}
       />
@@ -95,4 +102,4 @@ const Users: React.FC = () => {
   );
 };
 
-export default Users;
+export default Costs;
