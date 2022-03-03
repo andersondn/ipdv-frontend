@@ -69,7 +69,7 @@ const SignUp: React.FC = () => {
             <Row justify="space-between">
               <Form.Item wrapperCol={{ offset: 1, span: 6 }}>
                 <Button type="primary" loading={false} htmlType="submit">
-                  {isLoading ? "Entrando..." : "Entrar"}
+                  {isLoading ? "Cadastrando..." : "Cadastrar"}
                 </Button>
               </Form.Item>
               <Link to={"/login"}>Voltar pro login</Link>

@@ -32,7 +32,7 @@ const Login: React.FC = () => {
     <>
       <Row style={{ height: "100%" }} justify="center" align="middle">
         <Col xl={6} sm={18} md={14} xs={24}>
-          <h1>Login page</h1>
+          <h1>Central de custo - Login</h1>
           <br />
 
           <Form name="basic" onFinish={onFinish}>
