@@ -2,7 +2,6 @@ import { Routes, Route, Outlet, useLocation, Navigate } from "react-router-dom";
 import Departments from "../pages/Departments";
 import CreateDepartment from "../pages/Departments/CreateDepartment";
 import UpdateDepartment from "../pages/Departments/UpdateDepartment";
-import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Users from "../pages/Users";
 import CreateUser from "../pages/Users/CreateUser";
@@ -13,9 +12,10 @@ import UpdateCost from "../pages/Costs/UpdateCost";
 import { Layout } from "antd";
 import AppSlider from "../components/Slider";
 import AppHeader from "../components/Header";
-import { Content, Footer } from "antd/lib/layout/layout";
+import { Content } from "antd/lib/layout/layout";
 import LogOut from "../pages/Login/LogOut";
 import useAuth from "../hooks/useAuth";
+import SignUp from "../pages/Login/SignUp";
 
 export default function AppRoutes() {
   return (
@@ -65,6 +65,7 @@ export default function AppRoutes() {
           }
         >
           <Route path="/login" element={<Login />} />
+          <Route path="/signUp" element={<SignUp />} />
           <Route path="/logout" element={<LogOut />} />
         </Route>
       </Route>

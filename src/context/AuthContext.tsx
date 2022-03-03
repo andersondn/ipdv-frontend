@@ -8,6 +8,11 @@ type LoginParams = {
   password: string;
 };
 
+type SignUpParams = {
+  email: string;
+  password: string;
+  name: string;
+};
 type LoginResponse = {
   success: boolean;
   message?: string;
@@ -29,7 +34,7 @@ type AuthContextType = {
   sessionExpireDate?: Date;
   logIn: (loginData: LoginParams) => Promise<LoginResponse>;
   logOut: () => void;
-  // signUp: (registerData: IRegisterForm) => Promise<LoginResponse>;
+  signUp: (loginData: SignUpParams) => Promise<LoginResponse>;
 };
 
 export const AuthContext = createContext({} as AuthContextType);
@@ -37,8 +42,6 @@ export const AuthContext = createContext({} as AuthContextType);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser>();
   const [token, setToken] = useState<string>();
-  const [loading, setLoading] = useState(true);
-  // const [sessionExpireDate, setSessionExpireDate] = useState<Date>();
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   useEffect(() => {
@@ -78,17 +81,36 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   };
 
+  const signUp = async (loginData: LoginParams) => {
+    const { data } = await api.post("/login/signUp", loginData).catch((error) => ({
+      data: {
+        success: false,
+        message: error.message || "Erro ao tentar criar conta",
+      },
+    }));
+
+    if (data.id) {
+      return {
+        success: true,
+      };
+    }
+
+    return {
+      success: false,
+      message: data.message,
+    };
+  };
+
   const logOut = () => {
     deleteToken();
   };
-
 
   return (
     <>
       <AuthContext.Provider
         value={{
           isLoggedIn,
-          // signUp,
+          signUp,
           token,
           user,
           logOut,

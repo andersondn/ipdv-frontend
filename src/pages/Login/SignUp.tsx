@@ -3,28 +3,30 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
-// import { Container } from './styles';
-type LoginForm = {
+type SignUpForm = {
+  name: string;
   email: string;
   password: string;
 };
 
-const Login: React.FC = () => {
+const SignUp: React.FC = () => {
   const [isLoading, setLoading] = React.useState(false);
   let navigate = useNavigate();
 
   const auth = useAuth();
 
-  const onFinish = async ({ email, password }: LoginForm) => {
+  const onFinish = async ({ email, password, name }: SignUpForm) => {
     setLoading(true);
-    const result = await auth.logIn({
+    const result = await auth.signUp({
       email,
       password,
+      name,
     });
     if (result.success) {
-      return navigate("/");
+      message.success("Cadastro efetuado com sucesso!");
+      return navigate("/login");
     }
-    message.error(result.message || "Erro ao logar");
+    message.error(result.message || "Erro ao cadastrar");
     setLoading(false);
   };
 
@@ -32,10 +34,19 @@ const Login: React.FC = () => {
     <>
       <Row style={{ height: "100%" }} justify="center" align="middle">
         <Col xl={6} sm={18} md={14} xs={24}>
-          <h1>Login page</h1>
+          <h1>Criar conta</h1>
           <br />
 
           <Form name="basic" onFinish={onFinish}>
+            <Form.Item
+              label="Nome"
+              name="name"
+              rules={[
+                { required: true, message: "Por favor informe seu nome." },
+              ]}
+            >
+              <Input />
+            </Form.Item>
             <Form.Item
               label="Email"
               name="email"
@@ -61,9 +72,7 @@ const Login: React.FC = () => {
                   {isLoading ? "Entrando..." : "Entrar"}
                 </Button>
               </Form.Item>
-              <Link to={"/signUp"}>
-                <p>Criar conta</p>
-              </Link>
+              <Link to={"/login"}>Voltar pro login</Link>
             </Row>
           </Form>
         </Col>
@@ -72,4 +81,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default SignUp;
