@@ -47,7 +47,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (localToken) {
       setToken(localToken);
       setIsLoggedIn(true);
-      console.log(jwt_decode(localToken));
       setUser(jwt_decode(localToken) as AuthUser);
       return;
     }
@@ -55,15 +54,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const logIn = async (loginData: LoginParams) => {
-    console.log("logIn", loginData);
-
     const { data } = await api.post("/login", loginData).catch((error) => ({
       data: {
         success: false,
         message: error.message || "Erro ao tentar logar",
       },
     }));
-    console.log("logIn success", data);
 
     if (data.token) {
       setToken(data.token);
