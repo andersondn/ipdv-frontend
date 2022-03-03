@@ -66,7 +66,7 @@ const Users: React.FC = () => {
     },
     {
       title: "Departamento",
-      dataIndex: "department_id",
+      dataIndex: "department_title",
     },
     {
       title: "Ações",
