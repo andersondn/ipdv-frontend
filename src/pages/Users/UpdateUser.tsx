@@ -1,5 +1,5 @@
 import {  useNavigate, useParams } from "react-router-dom";
-import useSWR from "swr";
+import useSWR, { mutate } from 'swr';
 import UserForm from "./UserForm";
 import { message, Spin, Result } from 'antd';
 import { useState } from "react";
@@ -22,6 +22,7 @@ const UpdateUser = () => {
 
         if(result.success){
             message.success(`Usuário atualizado com sucesso!`);
+            mutate(`/users/${userId}`)
             navigate('/users')
         }else {
             message.error(result.message || `Erro ao cadastrar o Usuário.`);

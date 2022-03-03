@@ -1,5 +1,5 @@
 import {  useNavigate, useParams } from "react-router-dom";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import DepartmentForm from "./DepartmentForm";
 import { message, Spin, Result } from 'antd';
 import { useState } from "react";
@@ -22,6 +22,7 @@ const UpdateDepartment = () => {
 
         if(result.success){
             message.success(`Departamento atualizado com sucesso!`);
+            mutate(`/departments/${departmentId}`)
             navigate('/departments')
         }else {
             message.error(result.message || `Erro ao cadastrar o Departamento.`);

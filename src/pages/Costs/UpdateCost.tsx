@@ -1,5 +1,5 @@
 import {  useNavigate, useParams } from "react-router-dom";
-import useSWR from "swr";
+import useSWR, { mutate } from 'swr';
 import CostForm from "./CostForm";
 import { message, Spin, Result } from 'antd';
 import { useState } from "react";
@@ -23,6 +23,7 @@ const UpdateCost = () => {
 
         if(result.success){
             message.success(`Usuário atualizado com sucesso!`);
+            mutate(`/costs/${costId}`)
             navigate('/costs')
         }else {
             message.error(result.message || `Erro ao cadastrar o Usuário.`);
